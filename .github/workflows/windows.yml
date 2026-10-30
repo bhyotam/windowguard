@@ -1,0 +1,33 @@
+name: Windows build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Compile
+        shell: cmd
+        run: build.cmd
+      - name: Test geometry and policy
+        shell: cmd
+        run: build\GuardTests.exe
+      - uses: actions/upload-artifact@v7
+        with:
+          name: WindowGuard-windows-x64
+          if-no-files-found: error
+          path: |
+            build/WindowGuard.exe
+            README.md
+            CHANGELOG.md
+            LICENSE
+            docs/

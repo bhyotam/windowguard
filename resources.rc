@@ -1,0 +1,78 @@
+#include <windows.h>
+#include <commctrl.h>
+#include "resource.h"
+
+IDD_DISPLAYS DIALOGEX 0, 0, 420, 300
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD
+FONT 9, "Segoe UI"
+BEGIN
+    LTEXT "Keep windows off an audio-only HDMI display without disconnecting it.", -1, 12, 10, 396, 12
+    CONTROL "Display layout", IDC_MONITOR_MAP, "STATIC", SS_OWNERDRAW, 12, 29, 396, 70
+    LTEXT "Check the displays to keep clear:", -1, 12, 108, 270, 12
+    CONTROL "Displays", IDC_MONITORS, "SysListView32", WS_TABSTOP | WS_BORDER | LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS, 12, 124, 396, 91
+    LTEXT "Return windows to:", -1, 12, 227, 92, 12
+    COMBOBOX IDC_DESTINATION, 108, 224, 300, 120, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT "Leave at least one display available.", IDC_DISPLAY_NOTE, 12, 248, 396, 15
+    PUSHBUTTON "Refresh displays", IDC_REFRESH, 12, 272, 95, 16
+    PUSHBUTTON "Clear display rules", IDC_CLEAR_DISPLAYS, 115, 272, 100, 16
+END
+
+IDD_APPLICATIONS DIALOGEX 0, 0, 420, 300
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD
+FONT 9, "Segoe UI"
+BEGIN
+    LTEXT "Choose which applications Window Guard moves.", -1, 12, 10, 396, 12
+    CONTROL "All applications, except those listed below", IDC_ALL_APPS, "BUTTON", BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP, 12, 32, 396, 14
+    CONTROL "Only applications listed below", IDC_ONLY_APPS, "BUTTON", BS_AUTORADIOBUTTON, 12, 53, 396, 14
+    LISTBOX IDC_APP_LIST, 12, 81, 396, 111, LBS_NOTIFY | LBS_NOINTEGRALHEIGHT | WS_BORDER | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT IDC_APP_NAME, 12, 202, 312, 17, ES_AUTOHSCROLL
+    PUSHBUTTON "Add", IDC_ADD_APP, 332, 202, 76, 17
+    PUSHBUTTON "Browse...", IDC_BROWSE_APP, 12, 229, 86, 17
+    PUSHBUTTON "Running apps...", IDC_RUNNING_APP, 106, 229, 100, 17
+    PUSHBUTTON "Remove selected", IDC_REMOVE_APP, 306, 229, 102, 17
+    LTEXT "Rules match executable names (for example, vlc.exe), not window titles. All instances of that application follow the same rule.", -1, 12, 266, 396, 26
+END
+
+IDD_GENERAL DIALOGEX 0, 0, 420, 300
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD
+FONT 9, "Segoe UI"
+BEGIN
+    GROUPBOX "Behavior", -1, 12, 10, 396, 129
+    LTEXT "Check windows every", -1, 24, 30, 112, 12
+    EDITTEXT IDC_INTERVAL, 140, 27, 34, 17, ES_NUMBER | ES_RIGHT
+    CONTROL "", IDC_INTERVAL_SPIN, "msctls_updown32", UDS_ALIGNRIGHT | UDS_SETBUDDYINT | UDS_ARROWKEYS | UDS_AUTOBUDDY, 174, 27, 12, 17
+    LTEXT "seconds (1-30)", -1, 186, 30, 160, 12
+    CONTROL "Also move windows that only partly overlap a blocked display", IDC_PARTIAL, "BUTTON", BS_AUTOCHECKBOX | WS_TABSTOP, 24, 58, 370, 16
+    CONTROL "Resize oversized windows to fit the destination", IDC_RESIZE, "BUTTON", BS_AUTOCHECKBOX | WS_TABSTOP, 24, 82, 370, 16
+    LTEXT "Protection waits while you drag or resize a window.", -1, 24, 111, 370, 12
+    GROUPBOX "Startup", -1, 12, 150, 396, 49
+    CONTROL "Start Window Guard when I sign in to Windows", IDC_STARTUP, "BUTTON", BS_AUTOCHECKBOX | WS_TABSTOP, 24, 171, 370, 16
+    LTEXT "Window Guard 2.0", -1, 12, 214, 396, 12
+    LTEXT "Native Windows utility. No account, telemetry, or network connection.\nAudio, display modes, and GPU settings are left unchanged.", -1, 12, 232, 396, 28
+    EDITTEXT IDC_CONFIG_LOCATION, 12, 270, 396, 18, ES_READONLY | ES_AUTOHSCROLL
+END
+
+1 VERSIONINFO
+FILEVERSION 2,0,0,0
+PRODUCTVERSION 2,0,0,0
+FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
+FILEOS VOS_NT_WINDOWS32
+FILETYPE VFT_APP
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "FileDescription", "Window Guard"
+            VALUE "FileVersion", "2.0.0"
+            VALUE "InternalName", "WindowGuard"
+            VALUE "OriginalFilename", "WindowGuard.exe"
+            VALUE "ProductName", "Window Guard"
+            VALUE "ProductVersion", "2.0.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
