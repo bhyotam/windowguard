@@ -1,47 +1,40 @@
 # Window Guard
 
-Keep HDMI audio without losing windows on a screen you cannot see.
+If you send audio over HDMI to a receiver or projector, Windows may treat it as another monitor. Disable that display and the audio output can disappear too. Leave it enabled and applications can open where you can't see them.
 
-An HDMI receiver or projector can appear in Windows as another monitor, even when you only use it for sound. On some setups, disconnecting that display in Windows also removes the HDMI audio output. Leaving it connected keeps the sound working, but gives applications somewhere invisible to open.
+Window Guard moves those windows back to your normal screens. The HDMI connection stays active, so you can keep using it for sound.
 
-Window Guard leaves that connection alone. It runs in the system tray and moves windows off the displays you mark as audio-only, back onto a screen you actually use. It also catches windows that are only partly on the unwanted display.
+## Setup
 
-This is a workaround for the extra desktop, not a driver fix: the display stays enabled, audio routing stays unchanged, and your mouse can still enter that desktop area.
+Requires Windows 10 version 1703 or later, or Windows 11, x64. There is no installer or extra runtime to install.
 
-## Set it up
+1. Download the Windows x64 ZIP from [Releases](https://github.com/bhyotam/windowguard/releases/latest). Extract it to a permanent folder and run `WindowGuard.exe`.
+2. In **Displays**, check the screen you want to keep clear. Leave your normal screens unchecked.
+3. Pick a destination, or leave **Automatic** selected, then click **Apply**.
 
-1. Download the Windows x64 ZIP from [Releases](../../releases/latest), extract it into a folder you will keep, and run `WindowGuard.exe`.
-2. Under **Displays**, check the HDMI display you want to keep clear. Leave your normal screen unchecked.
-3. Choose where windows should return, or leave **Automatic** selected. Click **Apply**.
-4. If you want it running after a restart, enable **Start Window Guard when I sign in to Windows** under **General**.
+The default check interval is two seconds. Closing settings leaves the program in the tray. To start it at sign-in, enable that option under **General**.
 
-Nothing is blocked until you choose a display. The default check interval is two seconds. Closing settings leaves the guard running; right-click its tray icon to pause it or exit.
+When you want to use the projector, right-click the tray icon and pause protection. You can also exclude your media player under **Applications**, so the guard leaves it alone.
 
-Windows 10 version 1703 or later, or Windows 11, x64. No installer, administrator account, or extra runtime is needed for ordinary applications. The executable is unsigned, so Windows may show a reputation warning. Do not turn off security protections to run it.
+## Limitations
 
-## When you actually use the projector
+This doesn't remove the extra desktop. Your pointer can still enter it, and a window may sit there until the next check.
 
-Pause the guard from the tray before putting windows on that display. Alternatively, use **Applications** to exclude your media player, such as `vlc.exe`. You can also manage only a specific list of applications instead of all of them. Rules apply to executable names, not individual documents or window titles.
+Minimized windows are left alone until you restore them. Some administrator windows, fullscreen games, and applications that control their own position may not move. If a driver update or cable change alters a display's identity, select it again in settings.
 
-The **General** tab controls the check interval, partial overlaps, and whether oversized windows may be resized. Maximized windows stay maximized. The guard waits while you drag a window and leaves minimized windows alone until you restore them.
+The executable is unsigned and may trigger a Windows reputation warning. Don't disable Windows security protections to run it.
 
-## Things to know
+See [Settings](docs/usage.md) for application rules, startup, configuration files, and troubleshooting.
 
-Some elevated applications, exclusive-fullscreen games, and windows that enforce their own size or position may resist being moved. Display identities can change after a graphics-driver update or a cable-port change; check your selection if protection stops working.
+## Build
 
-There are no network requests, accounts, or telemetry. Settings stay on your PC. To remove the program, turn off its startup option, exit through the tray, and delete its folder.
-
-See [settings and troubleshooting](docs/usage.md) for storage locations, display rules, command-line options, and limitations.
-
-## Build and development
-
-Install Visual Studio 2022 or newer with **Desktop development with C++** and a Windows SDK. From the source directory, run:
+Install Visual Studio 2022 or newer with **Desktop development with C++** and a Windows SDK, then run:
 
 ```bat
 build.cmd
 build\GuardTests.exe
 ```
 
-The program is C++17 using Win32 controls and a statically linked runtime. The build treats warnings as errors. [Implementation notes](docs/design.md) explain window detection, placement, resource use, and the test commands.
+The code is C++17 and Win32, with a statically linked runtime. [Development notes](docs/design.md) cover the placement logic and tests.
 
-Licensed under [MIT](LICENSE).
+[MIT license](LICENSE).
