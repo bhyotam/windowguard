@@ -1,23 +1,25 @@
 # Window Guard
 
-I wanted to use HDMI for sound without having an extra screen in Windows.
+Some projector and AV receiver setups lose HDMI audio when their display is disabled in Windows. To keep the audio output available, the display has to stay enabled, even if it isn't being used for video. Applications can then open on that unused display, leaving their windows out of sight.
 
-With some projectors and AV receivers, disabling the display in Windows also removes the HDMI audio output. Keeping it enabled gets the sound working, but leaves another desktop where applications can open out of sight.
+Window Guard works around this by moving those windows back to another screen. It checks for windows on the selected displays every two seconds by default, including windows that only partly overlap them. The HDMI display stays enabled, and audio settings are left unchanged.
 
-Window Guard is a workaround for that. It leaves the HDMI display connected and moves windows back to your other screens, including windows that are only partly on it. By default, it checks every two seconds.
+The extra display will still appear in Windows Settings, and the mouse pointer can still enter it. Window Guard moves application windows; it doesn't remove the display from the desktop.
 
-It doesn't give Windows a true audio-only HDMI mode. The extra display will still appear in Settings, and your mouse can still enter it. The point is to stop losing application windows there.
+## Setup
 
-## Using it
+1. Download the Windows x64 ZIP from [Releases](https://github.com/bhyotam/windowguard/releases/latest), extract it to a permanent folder, and run `WindowGuard.exe`.
+2. Under **Displays**, check the display you want to keep windows off. Leave at least one display you use unchecked.
+3. Choose a destination screen, or leave **Automatic** selected, then click **Apply**.
 
-1. Download the Windows x64 ZIP from [Releases](https://github.com/bhyotam/windowguard/releases/latest), extract it, and run `WindowGuard.exe`.
-2. Under **Displays**, check the screen you don't want windows on. Leave your normal screens unchecked.
-3. Choose where the windows should go, or leave **Automatic** selected, and click **Apply**.
+Closing settings leaves the program running in the system tray. Startup is off by default. To start it at sign-in, enable the startup option under **General** and click **Apply**.
 
-Closing settings leaves it running in the tray. If you want it to start with Windows, keep the executable in a permanent folder and enable startup under **General**.
+When using the projector for video, choose **Pause protection** from the tray menu.
 
-If you also use the projector for video, pause the guard from the tray menu or exclude your player under **Applications**.
+## Requirements
 
-Windows 10 (1703 or later) or Windows 11, x64. The executable isn't code-signed, so Windows may show a warning.
+Requires an x64 version of Windows 10 (version 1703 or later) or Windows 11. No additional runtime is required. The executable is unsigned, so Windows may show a reputation warning.
 
-[Settings and troubleshooting](docs/usage.md) · [Building and development](docs/design.md) · [MIT license](LICENSE)
+See the [usage guide](docs/usage.md) for application rules, configuration, and limitations, or the [development notes](docs/design.md) to build from source.
+
+[MIT license](LICENSE).
