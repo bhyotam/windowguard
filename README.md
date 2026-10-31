@@ -1,40 +1,23 @@
 # Window Guard
 
-If you send audio over HDMI to a receiver or projector, Windows may treat it as another monitor. Disable that display and the audio output can disappear too. Leave it enabled and applications can open where you can't see them.
+I wanted to use HDMI for sound without having an extra screen in Windows.
 
-Window Guard moves those windows back to your normal screens. The HDMI connection stays active, so you can keep using it for sound.
+With some projectors and AV receivers, disabling the display in Windows also removes the HDMI audio output. Keeping it enabled gets the sound working, but leaves another desktop where applications can open out of sight.
 
-## Setup
+Window Guard is a workaround for that. It leaves the HDMI display connected and moves windows back to your other screens, including windows that are only partly on it. By default, it checks every two seconds.
 
-Requires Windows 10 version 1703 or later, or Windows 11, x64. There is no installer or extra runtime to install.
+It doesn't give Windows a true audio-only HDMI mode. The extra display will still appear in Settings, and your mouse can still enter it. The point is to stop losing application windows there.
 
-1. Download the Windows x64 ZIP from [Releases](https://github.com/bhyotam/windowguard/releases/latest). Extract it to a permanent folder and run `WindowGuard.exe`.
-2. In **Displays**, check the screen you want to keep clear. Leave your normal screens unchecked.
-3. Pick a destination, or leave **Automatic** selected, then click **Apply**.
+## Using it
 
-The default check interval is two seconds. Closing settings leaves the program in the tray. To start it at sign-in, enable that option under **General**.
+1. Download the Windows x64 ZIP from [Releases](https://github.com/bhyotam/windowguard/releases/latest), extract it, and run `WindowGuard.exe`.
+2. Under **Displays**, check the screen you don't want windows on. Leave your normal screens unchecked.
+3. Choose where the windows should go, or leave **Automatic** selected, and click **Apply**.
 
-When you want to use the projector, right-click the tray icon and pause protection. You can also exclude your media player under **Applications**, so the guard leaves it alone.
+Closing settings leaves it running in the tray. If you want it to start with Windows, keep the executable in a permanent folder and enable startup under **General**.
 
-## Limitations
+If you also use the projector for video, pause the guard from the tray menu or exclude your player under **Applications**.
 
-This doesn't remove the extra desktop. Your pointer can still enter it, and a window may sit there until the next check.
+Windows 10 (1703 or later) or Windows 11, x64. The executable isn't code-signed, so Windows may show a warning.
 
-Minimized windows are left alone until you restore them. Some administrator windows, fullscreen games, and applications that control their own position may not move. If a driver update or cable change alters a display's identity, select it again in settings.
-
-The executable is unsigned and may trigger a Windows reputation warning. Don't disable Windows security protections to run it.
-
-See [Settings](docs/usage.md) for application rules, startup, configuration files, and troubleshooting.
-
-## Build
-
-Install Visual Studio 2022 or newer with **Desktop development with C++** and a Windows SDK, then run:
-
-```bat
-build.cmd
-build\GuardTests.exe
-```
-
-The code is C++17 and Win32, with a statically linked runtime. [Development notes](docs/design.md) cover the placement logic and tests.
-
-[MIT license](LICENSE).
+[Settings and troubleshooting](docs/usage.md) · [Building and development](docs/design.md) · [MIT license](LICENSE)
